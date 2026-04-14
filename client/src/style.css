@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --gold: #c4973c;
+  --gold-bright: #d4a84a;
+  --gold-glow: rgba(196, 151, 60, 0.3);
+  --bg-base: #080706;
+  --bg-surface: #0f0d0b;
+  --bg-elevated: #161310;
+  --bg-hover: #1c1914;
+  --border-subtle: rgba(196, 151, 60, 0.12);
+  --border-default: rgba(196, 151, 60, 0.22);
+  --border-accent: rgba(196, 151, 60, 0.5);
+  --text-primary: #e0d4be;
+  --text-secondary: #a89478;
+  --text-muted: #5a4e3e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.input-gold {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-gold::placeholder {
+  color: var(--text-muted);
+}
+
+.input-gold:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 2px rgba(196, 151, 60, 0.1);
+}
+
+.btn-gold-active {
+  background: rgba(196, 151, 60, 0.15);
+  border-color: rgba(196, 151, 60, 0.55);
+  color: var(--gold);
+}
+
+.btn-gold-inactive {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.btn-gold-inactive:hover {
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+.section-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-accent), transparent);
+}
+
+.font-display {
+  font-family: 'Cinzel', 'Palatino Linotype', serif;
+}
+
+.font-data {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.accent-gold {
+  accent-color: var(--gold);
+}

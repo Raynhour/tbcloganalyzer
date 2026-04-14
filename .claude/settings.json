@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx ts-node -e ':*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000/graphql -H 'Content-Type: application/json' -d '{\"query\":\"{ reportConsumables\\(reportCode: \\\\\"trg8Y2V1ZBcXk6Pz\\\\\", fightIds: [1]\\) { reportTitle encounters { id name kill } players { playerName consumables { name uptimePercent } } } }\"}')",
+      "Bash(curl -s http://localhost:3000/graphql -H 'Content-Type: application/json' -d '{\"query\":\"{ reportConsumables\\(reportCode: \\\\\"trg8Y2V1ZBcXk6Pz\\\\\", fightIds: [2,3,8,11]\\) { players { playerName consumables { name uptimePercent } } } }\"}')",
+      "Bash(python3 -c ':*)",
+      "Bash(node -e ':*)",
+      "Bash(curl -s http://localhost:3000/graphql -H 'Content-Type: application/json' -d '{\"query\":\"{ reportConsumables\\(reportCode: \\\\\"trg8Y2V1ZBcXk6Pz\\\\\", fightId: 2\\) { players { playerName consumables { name uptimePercent } } } }\"}')",
+      "Bash(xargs kill:*)",
+      "Bash(kill 1203 1225)",
+      "Bash(kill 94381)",
+      "Bash(curl -s -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '{\"query\":\"query { reportConsumables\\(reportCode: \\\\\"trg8Y2V1ZBcXk6Pz\\\\\", fightId: 1\\) { reportTitle players { playerName class spec } } }\"}')",
+      "Bash(/Users/voko/Projects/log-analyzer/server/node_modules/.bin/tsc --noEmit)",
+      "Bash(/Users/voko/Projects/log-analyzer/client/node_modules/.bin/vue-tsc --noEmit)",
+      "Bash(npm test:*)",
+      "Bash(npx prettier:*)"
+    ]
+  }
+}
