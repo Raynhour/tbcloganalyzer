@@ -28,7 +28,7 @@ function onSubmit() {
         style="
           font-size: clamp(1.8rem, 5vw, 3rem);
           font-weight: 700;
-          color: var(--gold);
+          color: var(--cyan);
           letter-spacing: 0.12em;
           line-height: 1.2;
         "
@@ -36,7 +36,7 @@ function onSubmit() {
         WoW TBC<br class="sm:hidden" /><span class="hidden sm:inline"> </span>Log Analyzer
       </h1>
 
-      <div class="divider-gold w-24 mb-4"></div>
+      <div class="divider-cyan w-24 mb-4"></div>
 
       <p
         class="text-xs uppercase tracking-widest mb-10"
