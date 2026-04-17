@@ -179,6 +179,22 @@ export const TBC_CONSUMABLES = new Map<number, ConsumableInfo>([
       icon: 'inv_potion_27',
     },
   ],
+  [
+    17539,
+    {
+      name: 'Greater Arcane Elixir',
+      category: 'elixir',
+      icon: 'inv_potion_25',
+    },
+  ],
+  [
+    17538,
+    {
+      name: 'Elixir of the Mongoose',
+      category: 'elixir',
+      icon: 'inv_misc_monsterscales_07',
+    },
+  ],
 
   // Guardian Elixirs
   [
@@ -513,7 +529,7 @@ export const WEAPON_ENCHANT_TO_SPELL_ID = new Map<number, number>([
   [2629, 25294], // Brilliant Mana Oil
   [2628, 25122], // Brilliant Wizard Oil
   [2627, 25124], // Superior Mana Oil
-  [2626, 28019], // Superior Wizard Oil
+  [2626, 22522], // Superior Wizard Oil
   [3345, 34340], // Adamantite Weightstone
   [3344, 34339], // Adamantite Sharpening Stone
   [2841, 28898], // Blessed Wizard Oil
