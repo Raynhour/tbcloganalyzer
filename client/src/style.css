@@ -2,19 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --gold: #c4973c;
-  --gold-bright: #d4a84a;
-  --gold-glow: rgba(196, 151, 60, 0.3);
-  --bg-base: #080706;
-  --bg-surface: #0f0d0b;
-  --bg-elevated: #161310;
-  --bg-hover: #1c1914;
-  --border-subtle: rgba(196, 151, 60, 0.12);
-  --border-default: rgba(196, 151, 60, 0.22);
-  --border-accent: rgba(196, 151, 60, 0.5);
-  --text-primary: #e0d4be;
-  --text-secondary: #a89478;
-  --text-muted: #5a4e3e;
+  --cyan: #22d3ee;
+  --cyan-bright: #38e8ff;
+  --cyan-glow: rgba(34, 211, 238, 0.3);
+  --bg-base: #060a0e;
+  --bg-surface: #0b1018;
+  --bg-elevated: #111820;
+  --bg-hover: #161f28;
+  --border-subtle: rgba(34, 211, 238, 0.10);
+  --border-default: rgba(34, 211, 238, 0.20);
+  --border-accent: rgba(34, 211, 238, 0.45);
+  --border-table: rgba(34, 211, 238, 0.14);
+  --text-primary: #d4e8f0;
+  --text-secondary: #7a9aaa;
+  --text-muted: #3a5a6a;
 }
 
 *, *::before, *::after {
@@ -28,7 +29,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.input-gold {
+.input-cyan {
   background: var(--bg-surface);
   border: 1px solid var(--border-default);
   color: var(--text-primary);
@@ -36,28 +37,28 @@ html, body {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.input-gold::placeholder {
+.input-cyan::placeholder {
   color: var(--text-muted);
 }
 
-.input-gold:focus {
+.input-cyan:focus {
   border-color: var(--border-accent);
-  box-shadow: 0 0 0 2px rgba(196, 151, 60, 0.1);
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.08);
 }
 
-.btn-gold-active {
-  background: rgba(196, 151, 60, 0.15);
-  border-color: rgba(196, 151, 60, 0.55);
-  color: var(--gold);
+.btn-cyan-active {
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.50);
+  color: var(--cyan);
 }
 
-.btn-gold-inactive {
+.btn-cyan-inactive {
   background: var(--bg-surface);
   border-color: var(--border-subtle);
   color: var(--text-secondary);
 }
 
-.btn-gold-inactive:hover {
+.btn-cyan-inactive:hover {
   border-color: var(--border-default);
   color: var(--text-primary);
 }
@@ -69,7 +70,7 @@ html, body {
   overflow: hidden;
 }
 
-.divider-gold {
+.divider-cyan {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--border-accent), transparent);
 }
@@ -82,10 +83,10 @@ html, body {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-.text-gold {
-  color: var(--gold);
+.text-cyan {
+  color: var(--cyan);
 }
 
-.accent-gold {
-  accent-color: var(--gold);
+.accent-cyan {
+  accent-color: var(--cyan);
 }
