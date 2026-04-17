@@ -269,7 +269,7 @@ function originalPlayer(playerName: string) {
           {{ selectedSpellIds.size + selectedMissingSpellIds.size }} selected ·
           <button
             class="transition-colors"
-            style="color: var(--gold)"
+            style="color: var(--cyan)"
             @click="selectedSpellIds = new Set(); selectedMissingSpellIds = new Set()"
           >clear</button>
         </span>
@@ -354,7 +354,7 @@ function originalPlayer(playerName: string) {
           Filter by missing
         </span>
         <span v-if="selectedMissingTypes.size > 0" class="ml-3 text-xs" style="color: var(--text-muted)">
-          <button class="transition-colors" style="color: var(--gold)" @click="selectedMissingTypes = new Set()">clear</button>
+          <button class="transition-colors" style="color: var(--cyan)" @click="selectedMissingTypes = new Set()">clear</button>
         </span>
       </div>
       <div class="flex flex-wrap gap-2 p-3">
@@ -383,14 +383,14 @@ function originalPlayer(playerName: string) {
       <div class="flex items-center gap-1 mb-4">
         <button
           class="px-3 py-1.5 text-xs rounded border transition-all duration-150"
-          :class="viewMode === 'matrix' ? 'btn-gold-active' : 'btn-gold-inactive'"
+          :class="viewMode === 'matrix' ? 'btn-cyan-active' : 'btn-cyan-inactive'"
           @click="viewMode = 'matrix'"
         >
           Matrix
         </button>
         <button
           class="px-3 py-1.5 text-xs rounded border transition-all duration-150"
-          :class="viewMode === 'detail' ? 'btn-gold-active' : 'btn-gold-inactive'"
+          :class="viewMode === 'detail' ? 'btn-cyan-active' : 'btn-cyan-inactive'"
           @click="viewMode = 'detail'"
         >
           Detail
@@ -521,7 +521,7 @@ function originalPlayer(playerName: string) {
 
       <div v-if="fightId != null" class="mt-2">
         <button
-          class="px-3 py-1 text-[10px] rounded border transition-colors duration-150 btn-gold-inactive"
+          class="px-3 py-1 text-[10px] rounded border transition-colors duration-150 btn-cyan-inactive"
           @click="toggleRawData(player.playerName)"
         >
           {{ expandedRawPlayer === player.playerName ? 'Hide' : 'Show' }} raw data
