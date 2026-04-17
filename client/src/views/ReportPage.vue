@@ -119,7 +119,7 @@ async function onClearCache() {
     <router-link
       to="/"
       class="font-display text-2xl font-bold mb-1 tracking-widest uppercase transition-opacity duration-200 hover:opacity-75"
-      style="color: var(--gold); letter-spacing: 0.1em"
+      style="color: var(--cyan); letter-spacing: 0.1em"
     >
       WoW TBC Log Analyzer
     </router-link>
@@ -169,7 +169,7 @@ async function onClearCache() {
               <input
                 v-model="bossOnly"
                 type="checkbox"
-                class="accent-gold w-3.5 h-3.5 rounded cursor-pointer"
+                class="accent-cyan w-3.5 h-3.5 rounded cursor-pointer"
               />
               Boss only
             </label>
@@ -177,7 +177,7 @@ async function onClearCache() {
               <input
                 v-model="hideWipes"
                 type="checkbox"
-                class="accent-gold w-3.5 h-3.5 rounded cursor-pointer"
+                class="accent-cyan w-3.5 h-3.5 rounded cursor-pointer"
               />
               Hide wipes
             </label>
@@ -186,7 +186,7 @@ async function onClearCache() {
         <div class="flex flex-wrap gap-1.5 p-3">
           <button
             class="px-3 py-1.5 text-xs rounded border transition-all duration-150"
-            :class="selectedFightId === null ? 'btn-gold-active' : 'btn-gold-inactive'"
+            :class="selectedFightId === null ? 'btn-cyan-active' : 'btn-cyan-inactive'"
             @click="navigateToFight(null)"
           >
             All fights
@@ -195,7 +195,7 @@ async function onClearCache() {
             v-for="encounter in filteredEncounters"
             :key="encounter.id"
             class="px-3 py-1.5 text-xs rounded border transition-all duration-150"
-            :class="selectedFightId === encounter.id ? 'btn-gold-active' : 'btn-gold-inactive'"
+            :class="selectedFightId === encounter.id ? 'btn-cyan-active' : 'btn-cyan-inactive'"
             @click="navigateToFight(encounter.id)"
           >
             {{ encounter.name }}
