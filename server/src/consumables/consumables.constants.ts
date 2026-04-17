@@ -529,7 +529,7 @@ export const WEAPON_ENCHANT_TO_SPELL_ID = new Map<number, number>([
   [2629, 25294], // Brilliant Mana Oil
   [2628, 25122], // Brilliant Wizard Oil
   [2627, 25124], // Superior Mana Oil
-  [2626, 28019], // Superior Wizard Oil
+  [2678, 28019], // Superior Wizard Oil
   [3345, 34340], // Adamantite Weightstone
   [3344, 34339], // Adamantite Sharpening Stone
   [2841, 28898], // Blessed Wizard Oil

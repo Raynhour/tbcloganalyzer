@@ -782,7 +782,7 @@ export class WarcraftLogsService {
       for (const item of player.combatantInfo?.gear ?? []) {
         if (!WEAPON_SLOTS.has(item.slot)) continue;
         if (!item.temporaryEnchant) continue;
-        const spellId = WEAPON_ENCHANT_TO_SPELL_ID.get(item.temporaryEnchant);
+const spellId = WEAPON_ENCHANT_TO_SPELL_ID.get(item.temporaryEnchant);
         if (spellId !== undefined) spellIds.push(spellId);
       }
       if (spellIds.length > 0) result.set(player.id, spellIds);
