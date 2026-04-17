@@ -40,10 +40,10 @@ describe('computeMissingConsumables', () => {
   });
 
   describe('wizard oil detection', () => {
-    it('Superior Wizard Oil (22522) satisfies weapon oil requirement for caster DPS', () => {
+    it('Superior Wizard Oil (28019) satisfies weapon oil requirement for caster DPS', () => {
       const player = makePlayer({
         spec: 'Fire',
-        consumables: [{ name: 'Superior Wizard Oil', category: 'weapon', icon: 'inv_potion_141', spellId: 22522, count: 1, uptimePercent: null }],
+        consumables: [{ name: 'Superior Wizard Oil', category: 'weapon', icon: 'inv_potion_141', spellId: 28019, count: 1, uptimePercent: null }],
       });
       const missing = computeMissingConsumables(player);
       expect(missing.some((m) => m.type === 'weapon_oil')).toBe(false);

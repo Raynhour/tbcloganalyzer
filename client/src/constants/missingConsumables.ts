@@ -42,7 +42,7 @@ const MANA_OIL_IDS = new Set([
 // Wizard oils — caster DPS specs
 const WIZARD_OIL_IDS = new Set([
   25122, // Brilliant Wizard Oil
-  22522, // Superior Wizard Oil
+  28019, // Superior Wizard Oil
   28898, // Blessed Wizard Oil
 ]);
 

@@ -63,7 +63,7 @@ const PINNED_CONSUMABLES: UniqueConsumable[] = [
   { spellId: 25294, name: 'Brilliant Mana Oil',          icon: 'inv_potion_100',               category: 'weapon' },
   { spellId: 25124, name: 'Superior Mana Oil',            icon: 'inv_potion_98',                category: 'weapon' },
   { spellId: 25122, name: 'Brilliant Wizard Oil',         icon: 'inv_potion_105',               category: 'weapon' },
-  { spellId: 22522, name: 'Superior Wizard Oil',          icon: 'inv_potion_141',               category: 'weapon' },
+  { spellId: 28019, name: 'Superior Wizard Oil',          icon: 'inv_potion_141',               category: 'weapon' },
   { spellId: 28898, name: 'Blessed Wizard Oil',           icon: 'inv_potion_105',               category: 'weapon' },
   { spellId: 34339, name: 'Adamantite Sharpening Stone',  icon: 'inv_stone_sharpeningstone_05', category: 'weapon' },
   { spellId: 34340, name: 'Adamantite Weightstone',       icon: 'inv_stone_weightstone_05',     category: 'weapon' },
