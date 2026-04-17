@@ -22,15 +22,15 @@ function onSubmit() {
       type="text"
       placeholder="Paste Warcraft Logs report URL or code..."
       :disabled="loading"
-      class="input-gold flex-1 px-4 py-3 text-sm rounded"
+      class="input-cyan flex-1 px-4 py-3 text-sm rounded"
     />
     <button
       type="submit"
       :disabled="loading || !modelValue.trim()"
       class="font-display px-6 py-3 text-xs uppercase rounded tracking-widest font-semibold transition-opacity duration-200 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
       style="
-        background: var(--gold);
-        color: #0c0a08;
+        background: var(--cyan);
+        color: #060a0e;
         border: none;
         letter-spacing: 0.1em;
       "
