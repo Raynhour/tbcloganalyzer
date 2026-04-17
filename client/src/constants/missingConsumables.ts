@@ -13,6 +13,8 @@ const BATTLE_ELIXIR_IDS = new Set([
   33720, // Onslaught Elixir
   33726, // Elixir of Mastery
   11406, // Elixir of Demonslaying
+  17539, // Greater Arcane Elixir
+  17538, // Elixir of the Mongoose
 ]);
 
 // Guardian elixirs (defensive/utility) — flask replaces both
@@ -40,7 +42,7 @@ const MANA_OIL_IDS = new Set([
 // Wizard oils — caster DPS specs
 const WIZARD_OIL_IDS = new Set([
   25122, // Brilliant Wizard Oil
-  28019, // Superior Wizard Oil
+  22522, // Superior Wizard Oil
   28898, // Blessed Wizard Oil
 ]);
 
