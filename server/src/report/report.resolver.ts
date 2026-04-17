@@ -24,13 +24,14 @@ export class ReportResolver {
   async reportConsumables(
     @Args('reportCode') reportCode: string,
     @Args('fightId', { type: () => Int, nullable: true }) fightId?: number,
-    @Args('fightIds', { type: () => [Int], nullable: true })
-    fightIds?: number[],
+    @Args('bossOnly', { type: () => Boolean, nullable: true }) bossOnly?: boolean,
+    @Args('hideWipes', { type: () => Boolean, nullable: true }) hideWipes?: boolean,
   ): Promise<ConsumableReport> {
     return this.reportService.getConsumableReport(
       reportCode,
       fightId,
-      fightIds,
+      bossOnly,
+      hideWipes,
     );
   }
 

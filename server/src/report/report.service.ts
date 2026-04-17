@@ -26,7 +26,8 @@ export class ReportService {
   async getConsumableReport(
     reportCodeInput: string,
     fightId?: number,
-    fightIds?: number[],
+    bossOnly?: boolean,
+    hideWipes?: boolean,
   ) {
     const reportCode = this.extractReportCode(reportCodeInput);
 
@@ -115,44 +116,30 @@ export class ReportService {
       };
     }
 
-    // "All fights" mode — fetch per-fight data using batched GraphQL aliases
-    // This makes N_players * 3 requests instead of N_fights * N_players * 3
-    const targetFights = fightIds?.length
-      ? report.fights.filter((f) => fightIds.includes(f.id))
-      : report.fights;
+    // "All fights" mode — super-batch: 4 WCL requests total regardless of player count
+    const targetFights = report.fights.filter((f) => {
+      if (bossOnly && f.kill === null) return false;
+      if (hideWipes && f.kill === false) return false;
+      return true;
+    });
 
     const targetFightIds = targetFights.map((f) => f.id);
     const fightMap = new Map(targetFights.map((f) => [f.id, f]));
+    const actorIds = report.masterData.actors.map((a) => a.id);
 
-    // For each player: batch all fights into 3 requests (buffs, casts, deaths)
-    const [perPlayerData, perFightWeaponEnchants] = await Promise.all([
-      Promise.all(
-        report.masterData.actors.map(async (actor) => {
-          const [buffsMap, castsMap, deathsMap] = await Promise.all([
-            this.warcraftLogsService.fetchPerFightBuffsTables(
-              reportCode,
-              targetFightIds,
-              actor.id,
-            ),
-            this.warcraftLogsService.fetchPerFightCastsTables(
-              reportCode,
-              targetFightIds,
-              actor.id,
-            ),
-            this.warcraftLogsService.fetchPerFightDeathsTables(
-              reportCode,
-              targetFightIds,
-              actor.id,
-            ),
-          ]);
-          return { actorId: actor.id, buffsMap, castsMap, deathsMap };
-        }),
-      ),
-      this.warcraftLogsService.fetchPerFightSummaryTables(
-        reportCode,
-        targetFightIds,
-      ),
+    const [allBuffs, allCasts, allDeaths, perFightWeaponEnchants] = await Promise.all([
+      this.warcraftLogsService.fetchAllPlayersFightBuffsTables(reportCode, targetFightIds, actorIds),
+      this.warcraftLogsService.fetchAllPlayersFightCastsTables(reportCode, targetFightIds, actorIds),
+      this.warcraftLogsService.fetchAllPlayersFightDeathsTables(reportCode, targetFightIds, actorIds),
+      this.warcraftLogsService.fetchPerFightSummaryTables(reportCode, targetFightIds),
     ]);
+
+    const perPlayerData = report.masterData.actors.map((actor) => ({
+      actorId: actor.id,
+      buffsMap: allBuffs.get(actor.id)!,
+      castsMap: allCasts.get(actor.id)!,
+      deathsMap: allDeaths.get(actor.id)!,
+    }));
 
     // Assemble into per-fight player tables
     const perFightPlayerTables = new Map<

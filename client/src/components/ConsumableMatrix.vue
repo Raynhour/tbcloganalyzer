@@ -54,7 +54,11 @@ function encLabel(c: ConsumableEntry, fightId: number): { uptime: number | null;
 
 // Missing consumables for a specific encounter (synthetic player with only that fight's consumables)
 function missingInEncounter(player: PlayerConsumables, fightId: number) {
-  return computeMissingConsumables({ ...player, consumables: consumablesInEncounter(player, fightId) });
+  const orig = originalPlayer(player.playerName);
+  const usedInFight = orig.consumables.filter(
+    (c) => c.encounterBreakdown?.find((e) => e.fightId === fightId)?.used === true,
+  );
+  return computeMissingConsumables({ ...orig, consumables: usedInFight });
 }
 
 function originalPlayer(playerName: string): PlayerConsumables {
@@ -63,7 +67,7 @@ function originalPlayer(playerName: string): PlayerConsumables {
 </script>
 
 <template>
-  <div class="overflow-x-auto rounded" style="border: 1px solid var(--border-subtle)">
+  <div class="overflow-x-auto rounded" style="border: 1px solid var(--border-table)">
     <table class="text-xs border-collapse w-full" style="background: var(--bg-surface)">
       <thead>
         <tr style="background: var(--bg-elevated)">
@@ -73,8 +77,8 @@ function originalPlayer(playerName: string): PlayerConsumables {
             style="
               background: var(--bg-elevated);
               color: var(--text-muted);
-              border-bottom: 1px solid var(--border-default);
-              border-right: 1px solid var(--border-default);
+              border-bottom: 1px solid var(--border-table);
+              border-right: 1px solid var(--border-table);
             "
           >
             Player
@@ -87,8 +91,8 @@ function originalPlayer(playerName: string): PlayerConsumables {
             class="px-3 py-2.5 text-left font-normal"
             style="
               min-width: 180px;
-              border-bottom: 1px solid var(--border-default);
-              border-left: 1px solid var(--border-subtle);
+              border-bottom: 1px solid var(--border-table);
+              border-left: 1px solid var(--border-table);
               color: var(--text-secondary);
             "
           >
@@ -113,14 +117,14 @@ function originalPlayer(playerName: string): PlayerConsumables {
         <tr
           v-for="player in players"
           :key="player.playerName"
-          style="border-bottom: 1px solid var(--border-subtle)"
+          style="border-bottom: 1px solid var(--border-table)"
           @mouseenter="($event.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'"
           @mouseleave="($event.currentTarget as HTMLElement).style.background = ''"
         >
           <!-- Player name (sticky) -->
           <td
             class="sticky left-0 z-10 px-3 py-2 whitespace-nowrap align-top"
-            style="background: inherit; border-right: 1px solid var(--border-default)"
+            style="background: inherit; border-right: 1px solid var(--border-table)"
           >
             <div class="flex items-center gap-1.5">
               <img
@@ -137,7 +141,7 @@ function originalPlayer(playerName: string): PlayerConsumables {
           <!-- All Fights cell -->
           <td
             class="px-3 py-2 align-top"
-            style="border-left: 1px solid var(--border-subtle)"
+            style="border-left: 1px solid var(--border-table)"
           >
             <div class="flex flex-wrap gap-x-3 gap-y-1.5 mb-1.5">
               <div
@@ -175,7 +179,7 @@ function originalPlayer(playerName: string): PlayerConsumables {
             v-for="enc in encounterCols.slice(1)"
             :key="enc.id!"
             class="px-3 py-2 align-top"
-            style="border-left: 1px solid var(--border-subtle)"
+            style="border-left: 1px solid var(--border-table)"
           >
             <div v-if="consumablesInEncounter(player, enc.id!).length" class="flex flex-wrap gap-x-3 gap-y-1.5 mb-1.5">
               <div

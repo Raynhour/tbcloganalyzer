@@ -256,7 +256,7 @@ function originalPlayer(playerName: string) {
     <div v-if="consumablesByCategory.length" class="section-panel mb-4">
       <div
         class="flex items-center px-4 py-2.5"
-        style="border-bottom: 1px solid var(--border-subtle)"
+        style="border-bottom: 1px solid var(--border-table)"
       >
         <span class="font-display text-xs uppercase tracking-widest" style="color: var(--text-muted); letter-spacing: 0.18em">
           Filter by consumable
@@ -307,7 +307,7 @@ function originalPlayer(playerName: string) {
           <div
             v-if="expandedFilterCategories.has(group.category)"
             class="px-3 py-2 space-y-0.5"
-            style="background: var(--bg-base); border-top: 1px solid var(--border-subtle)"
+            style="background: var(--bg-base); border-top: 1px solid var(--border-table)"
           >
             <div
               v-for="cons in group.consumables"
@@ -348,7 +348,7 @@ function originalPlayer(playerName: string) {
     <div v-if="availableMissingTypes.length" class="section-panel mb-6">
       <div
         class="flex items-center px-4 py-2.5"
-        style="border-bottom: 1px solid var(--border-subtle)"
+        style="border-bottom: 1px solid var(--border-table)"
       >
         <span class="font-display text-xs uppercase tracking-widest" style="color: var(--text-muted); letter-spacing: 0.18em">
           Filter by missing
@@ -430,14 +430,14 @@ function originalPlayer(playerName: string) {
 
       <table
         class="w-full text-xs text-left rounded overflow-hidden"
-        style="border: 1px solid var(--border-subtle); border-collapse: collapse"
+        style="border: 1px solid var(--border-table); border-collapse: collapse"
       >
         <thead>
           <tr style="background: var(--bg-elevated)">
-            <th class="px-4 py-2 font-medium" style="color: var(--text-muted); border-bottom: 1px solid var(--border-subtle)">Consumable</th>
-            <th class="px-4 py-2 font-medium" style="color: var(--text-muted); border-bottom: 1px solid var(--border-subtle)">Category</th>
-            <th class="px-4 py-2 font-medium text-right" style="color: var(--text-muted); border-bottom: 1px solid var(--border-subtle)">Count</th>
-            <th class="px-4 py-2 font-medium text-right" style="color: var(--text-muted); border-bottom: 1px solid var(--border-subtle)">Uptime</th>
+            <th class="px-4 py-2 font-medium" style="color: var(--text-muted); border-bottom: 1px solid var(--border-table)">Consumable</th>
+            <th class="px-4 py-2 font-medium" style="color: var(--text-muted); border-bottom: 1px solid var(--border-table)">Category</th>
+            <th class="px-4 py-2 font-medium text-right" style="color: var(--text-muted); border-bottom: 1px solid var(--border-table)">Count</th>
+            <th class="px-4 py-2 font-medium text-right" style="color: var(--text-muted); border-bottom: 1px solid var(--border-table)">Uptime</th>
           </tr>
         </thead>
         <tbody>
@@ -445,7 +445,7 @@ function originalPlayer(playerName: string) {
             <tr
               class="transition-colors duration-100"
               :class="{ 'cursor-pointer': consumable.encounterBreakdown }"
-              style="border-top: 1px solid var(--border-subtle)"
+              style="border-top: 1px solid var(--border-table)"
               :style="{ background: 'var(--bg-surface)' }"
               @mouseenter="($event.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)'"
               @mouseleave="($event.currentTarget as HTMLElement).style.background = 'var(--bg-surface)'"
@@ -492,7 +492,7 @@ function originalPlayer(playerName: string) {
             </tr>
             <tr
               v-if="isConsumableExpanded(player.playerName, consumable.spellId) && consumable.encounterBreakdown"
-              style="border-top: 1px solid var(--border-subtle)"
+              style="border-top: 1px solid var(--border-table)"
             >
               <td colspan="4" class="px-4 py-3" style="background: var(--bg-base)">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">

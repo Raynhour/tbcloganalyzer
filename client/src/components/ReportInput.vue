@@ -29,8 +29,8 @@ function onSubmit() {
       :disabled="loading || !modelValue.trim()"
       class="font-display px-6 py-3 text-xs uppercase rounded tracking-widest font-semibold transition-opacity duration-200 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
       style="
-        background: linear-gradient(135deg, #6b5018, var(--gold) 50%, #6b5018);
-        color: #060504;
+        background: var(--gold);
+        color: #0c0a08;
         border: none;
         letter-spacing: 0.1em;
       "

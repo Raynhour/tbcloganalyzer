@@ -10,7 +10,7 @@ import ConsumableTable from '../components/ConsumableTable.vue';
 
 const props = defineProps<{ id: string; fightId?: string }>();
 const router = useRouter();
-const reportUrl = ref('');
+const reportUrl = ref(props.id);
 const bossOnly = ref(true);
 const hideWipes = ref(false);
 const selectedClasses = ref<Set<string>>(new Set());
@@ -21,7 +21,7 @@ const selectedFightId = computed<number | null>(() => {
   return Number.isFinite(n) ? n : null;
 });
 
-const allEncounters = ref<ConsumableReport['encounters']>([]);
+const allEncounters = computed(() => report.value?.encounters ?? []);
 
 function filterEncounters(encounters: ConsumableReport['encounters']) {
   return encounters.filter((e) => {
@@ -33,18 +33,13 @@ function filterEncounters(encounters: ConsumableReport['encounters']) {
 
 const filteredEncounters = computed(() => filterEncounters(allEncounters.value));
 
-const filteredFightIds = computed(() => {
-  if (selectedFightId.value !== null) return undefined;
-  if (!bossOnly.value && !hideWipes.value) return undefined;
-  return filteredEncounters.value.map((e) => e.id);
-});
-
-const { result, loading, error, refetch } = useQuery<{
+const { result, loading, error } = useQuery<{
   reportConsumables: ConsumableReport;
 }>(GET_CONSUMABLES, () => ({
   reportCode: props.id,
-  fightId: selectedFightId.value,
-  fightIds: filteredFightIds.value,
+  fightId: selectedFightId.value ?? undefined,
+  bossOnly: selectedFightId.value === null ? bossOnly.value || undefined : undefined,
+  hideWipes: selectedFightId.value === null ? hideWipes.value || undefined : undefined,
 }));
 
 const report = computed(() => result.value?.reportConsumables ?? null);
@@ -64,16 +59,10 @@ const filteredReport = computed(() => {
   };
 });
 
-watch(report, (r) => {
-  if (r && r.encounters.length) {
-    allEncounters.value = r.encounters;
-  }
-});
-
 watch(
   () => props.id,
-  () => {
-    reportUrl.value = '';
+  (id) => {
+    reportUrl.value = id;
     selectedClasses.value = new Set();
   },
 );
@@ -117,8 +106,7 @@ const { mutate: clearCache, loading: clearingCache } = useMutation(CLEAR_REPORT_
 
 async function onClearCache() {
   await clearCache({ reportCode: props.id });
-  await client.clearStore();
-  refetch();
+  await client.resetStore();
 }
 </script>
 
@@ -130,8 +118,8 @@ async function onClearCache() {
     <!-- Header -->
     <router-link
       to="/"
-      class="font-display text-2xl font-bold mb-1 tracking-widest uppercase transition-opacity duration-200 hover:opacity-80"
-      style="color: var(--gold); text-shadow: 0 0 24px rgba(196,151,60,0.3); letter-spacing: 0.1em"
+      class="font-display text-2xl font-bold mb-1 tracking-widest uppercase transition-opacity duration-200 hover:opacity-75"
+      style="color: var(--gold); letter-spacing: 0.1em"
     >
       WoW TBC Log Analyzer
     </router-link>

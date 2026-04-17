@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_CONSUMABLES = gql`
-  query GetConsumables($reportCode: String!, $fightId: Int, $fightIds: [Int!]) {
-    reportConsumables(reportCode: $reportCode, fightId: $fightId, fightIds: $fightIds) {
+  query GetConsumables($reportCode: String!, $fightId: Int, $bossOnly: Boolean, $hideWipes: Boolean) {
+    reportConsumables(reportCode: $reportCode, fightId: $fightId, bossOnly: $bossOnly, hideWipes: $hideWipes) {
       reportTitle
       encounters {
         id

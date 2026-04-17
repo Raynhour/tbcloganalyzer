@@ -492,6 +492,114 @@ export class WarcraftLogsService {
   }
 
   /**
+   * Fetch buffs table for ALL players × ALL fights in a single GraphQL request via aliases.
+   * Returns a Map of actorId -> Map of fightId -> { auras, totalTime }.
+   */
+  async fetchAllPlayersFightBuffsTables(
+    reportCode: string,
+    fightIds: number[],
+    actorIds: number[],
+  ): Promise<Map<number, Map<number, { auras: WclTableResponse['reportData']['report']['table']['data']['auras']; totalTime: number }>>> {
+    const aliases = actorIds.flatMap((sourceId) =>
+      fightIds.map(
+        (fid) =>
+          `p${sourceId}_f${fid}: table(dataType: Buffs, fightIDs: [${fid}], sourceID: ${sourceId})`,
+      ),
+    );
+    const query = `query SuperBatchBuffs($code: String!) {
+      reportData { report(code: $code) { ${aliases.join('\n')} } }
+    }`;
+
+    const data = await this.requestWithRetry<{
+      reportData: { report: Record<string, { data: { auras: any[]; totalTime: number } }> };
+    }>(query, { code: reportCode });
+
+    const result = new Map<number, Map<number, { auras: any[]; totalTime: number }>>();
+    for (const sourceId of actorIds) {
+      const fightMap = new Map<number, { auras: any[]; totalTime: number }>();
+      for (const fid of fightIds) {
+        const tableData = data.reportData.report[`p${sourceId}_f${fid}`]?.data;
+        fightMap.set(fid, tableData ?? { auras: [], totalTime: 0 });
+      }
+      result.set(sourceId, fightMap);
+    }
+    return result;
+  }
+
+  /**
+   * Fetch casts table for ALL players × ALL fights in a single GraphQL request via aliases.
+   * Returns a Map of actorId -> Map of fightId -> cast entries.
+   */
+  async fetchAllPlayersFightCastsTables(
+    reportCode: string,
+    fightIds: number[],
+    actorIds: number[],
+  ): Promise<Map<number, Map<number, { abilityGameID: number; total: number }[]>>> {
+    const castOnlyIds = Array.from(CAST_ONLY_SPELL_IDS).join(',');
+    const filterExpr = `ability.id IN (${castOnlyIds})`;
+
+    const aliases = actorIds.flatMap((sourceId) =>
+      fightIds.map(
+        (fid) =>
+          `p${sourceId}_f${fid}: table(dataType: Casts, fightIDs: [${fid}], sourceID: ${sourceId}, filterExpression: "${filterExpr}")`,
+      ),
+    );
+    const query = `query SuperBatchCasts($code: String!) {
+      reportData { report(code: $code) { ${aliases.join('\n')} } }
+    }`;
+
+    const data = await this.requestWithRetry<{
+      reportData: { report: Record<string, { data: { entries: { guid: number; total: number }[] } }> };
+    }>(query, { code: reportCode });
+
+    const result = new Map<number, Map<number, { abilityGameID: number; total: number }[]>>();
+    for (const sourceId of actorIds) {
+      const fightMap = new Map<number, { abilityGameID: number; total: number }[]>();
+      for (const fid of fightIds) {
+        const entries = data.reportData.report[`p${sourceId}_f${fid}`]?.data?.entries ?? [];
+        fightMap.set(fid, entries.map((e) => ({ abilityGameID: e.guid, total: e.total })));
+      }
+      result.set(sourceId, fightMap);
+    }
+    return result;
+  }
+
+  /**
+   * Fetch deaths table for ALL players × ALL fights in a single GraphQL request via aliases.
+   * Returns a Map of actorId -> Map of fightId -> death entries.
+   */
+  async fetchAllPlayersFightDeathsTables(
+    reportCode: string,
+    fightIds: number[],
+    actorIds: number[],
+  ): Promise<Map<number, Map<number, WclDeathEntry[]>>> {
+    const aliases = actorIds.flatMap((sourceId) =>
+      fightIds.map(
+        (fid) =>
+          `p${sourceId}_f${fid}: table(dataType: Deaths, fightIDs: [${fid}], sourceID: ${sourceId})`,
+      ),
+    );
+    const query = `query SuperBatchDeaths($code: String!) {
+      reportData { report(code: $code) { ${aliases.join('\n')} } }
+    }`;
+
+    const data = await this.requestWithRetry<{
+      reportData: { report: Record<string, { data: { entries: WclDeathEntry[] } }> };
+    }>(query, { code: reportCode });
+
+    const result = new Map<number, Map<number, WclDeathEntry[]>>();
+    for (const sourceId of actorIds) {
+      const fightMap = new Map<number, WclDeathEntry[]>();
+      for (const fid of fightIds) {
+        const entries = data.reportData.report[`p${sourceId}_f${fid}`]?.data?.entries ?? [];
+        fightMap.set(fid, entries);
+      }
+      result.set(sourceId, fightMap);
+    }
+    return result;
+  }
+
+  /**
    * Fetch buffs table for each fight individually, batched into a single GraphQL request via aliases.
    * Returns a Map of fightId -> { auras, totalTime }.
    */
