@@ -1,0 +1,9 @@
+{
+  "name": "tbcloganalyzer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd .. && mkdir -p server/public && cp -r client/dist/. server/public/ && cd server && npm install && npm run build",
+    "start": "node server/dist/main"
+  }
+}
